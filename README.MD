@@ -23,7 +23,7 @@ PS. if your goal is advanced and you haven't built a Spring Boot application bef
 **Intermediate (Optional)**
 
 * Add relations between tables
-* Learn the [DTO pattern][https://www.baeldung.com/java-dto-pattern]
+* Learn the [DTO pattern](https://www.baeldung.com/java-dto-pattern)
 * Handle validation and exception errors
 * Persistent database, (PostgreSQL or MySQL)
 
