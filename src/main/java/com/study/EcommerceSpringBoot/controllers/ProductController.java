@@ -1,4 +1,4 @@
-package com.study.EcommerceSpringBoot.controller;
+package com.study.EcommerceSpringBoot.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,23 +10,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.study.EcommerceSpringBoot.bean.Product;
-import com.study.EcommerceSpringBoot.repository.ProductRepository;
+import com.study.EcommerceSpringBoot.models.Product;
+import com.study.EcommerceSpringBoot.repositories.ProductRepository;
 
 @RestController
+@RequestMapping("/api/v1")
 public class ProductController {
 	@Autowired
 	private ProductRepository repository;
 
 	// http://localhost:8080/api/v1/products
-	@GetMapping("/api/v1/products")
+	@GetMapping("/products")
 	public List<Product> getAllProducts() {
 		return repository.findAll();
 	}
 
-	@GetMapping("/api/v1/products/{id}")
+	@GetMapping("/products/{id}")
 	public Product getSingleProduct(@PathVariable long id) {
 		Optional<Product> product = repository.findById(id);
 
@@ -37,12 +39,12 @@ public class ProductController {
 		}
 	}
 
-	@PostMapping("/api/v1/products")
+	@PostMapping("/products")
 	public void createSingleProduct(@RequestBody Product product) {
 		repository.save(product);
 	}
 
-	@PutMapping("/api/v1/products/{id}")
+	@PutMapping("/products/{id}")
 	public void updateSingleProduct(@PathVariable long id, @RequestBody Product productBody) {
 		Optional<Product> product = repository.findById(id);
 
@@ -53,7 +55,7 @@ public class ProductController {
 		}
 	}
 
-	@DeleteMapping("/api/v1/products/{id}")
+	@DeleteMapping("/products/{id}")
 	public void deleteSingleProduct(@PathVariable long id) {
 		Optional<Product> product = repository.findById(id);
 
