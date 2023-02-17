@@ -20,17 +20,17 @@ import com.study.EcommerceSpringBoot.repositories.CategoryRepository;
 @RequestMapping("/api/v1")
 public class CategoryController {
 	@Autowired
-	private CategoryRepository repository;
+	private CategoryRepository categoryRepository;
 
 	// http://localhost:8080/api/v1/categories
 	@GetMapping("/categories")
 	public List<Category> getAllCategories() {
-		return repository.findAll();
+		return categoryRepository.findAll();
 	}
 
 	@GetMapping("/categories/{id}")
 	public Category getSingleCategory(@PathVariable long id) {
-		Optional<Category> category = repository.findById(id);
+		Optional<Category> category = categoryRepository.findById(id);
 
 		if (category.isEmpty()) {
 			throw new RuntimeException("The product with id [" + id + "] is not found.");
@@ -41,28 +41,28 @@ public class CategoryController {
 
 	@PostMapping("/categories")
 	public void createSingleCategory(@RequestBody Category category) {
-		repository.save(category);
+		categoryRepository.save(category);
 	}
 
 	@PutMapping("/categories/{id}")
 	public void updateSingleCategory(@PathVariable long id, @RequestBody Category categoryBody) {
-		Optional<Category> category = repository.findById(id);
+		Optional<Category> category = categoryRepository.findById(id);
 
 		if (category.isEmpty()) {
 			throw new RuntimeException("The category with id [" + id + "] is not found.");
 		} else {
-			repository.save(categoryBody);
+			categoryRepository.save(categoryBody);
 		}
 	}
 
 	@DeleteMapping("/categories/{id}")
 	public void deleteSingleCategory(@PathVariable long id) {
-		Optional<Category> category = repository.findById(id);
+		Optional<Category> category = categoryRepository.findById(id);
 
 		if (category.isEmpty()) {
 			throw new RuntimeException("The category with id [" + id + "] is not found.");
 		} else {
-			repository.deleteById(id);
+			categoryRepository.deleteById(id);
 		}
 	}
 }
